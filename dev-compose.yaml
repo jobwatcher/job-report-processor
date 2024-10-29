@@ -3,8 +3,8 @@ services:
     image: indeedoptimizer-scraper:latest
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
-      - scrapped_data:/tmp/indeed/scrapped_data
-      - logs:/tmp/indeed/logs
+      - ./scrapped_data:/tmp/indeed/scrapped_data
+      - ./logs:/tmp/indeed/logs
     environment:
       - DISPLAY
     env_file: ".env"
@@ -13,8 +13,8 @@ services:
   reportproc:
     build: "./images/dev/"
     volumes:
-      - "./src:/report-processor/src"
-      - "${HOME}/Development/indeedOptimizer/scrapped_data:/report-processor/scrapped_data"
+      - ./src:/report-processor/src
+      - ./scrapped_data:/report-processor/scrapped_data
     links: 
       - redis
   redis:
@@ -23,5 +23,4 @@ services:
       - 6379
     ports:
       - 8002:8001
-    environment:
-      - "REDIS_ARGS=--requirepass mypassword"
+      
