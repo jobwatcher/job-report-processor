@@ -3,8 +3,8 @@ services:
     image: indeedoptimizer-scraper:latest
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
-      - ../indeedOptimizer/scrapped_data:/tmp/indeed/scrapped_data
-      - ../indeedOptimizer/logs:/tmp/indeed/logs
+      - scrapped_data:/tmp/indeed/scrapped_data
+      - logs:/tmp/indeed/logs
     environment:
       - DISPLAY
     env_file: ".env"
