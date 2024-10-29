@@ -8,6 +8,8 @@ All commands are executed from the same directory as this readme.
 
 ```shell
 docker build -t report-processor-dev --no-cache -f images/dev/Dockerfile .
+
+docker compose -f dev-compose.yaml build --no-cache reportproc
 ```
 
 ### Run the dev image
@@ -15,6 +17,11 @@ docker build -t report-processor-dev --no-cache -f images/dev/Dockerfile .
 Restart the container if you change the requirements. 
 
 ```shell
+
+docker compose -f dev-compose.yaml up
+
+
+
 docker run -i -t --rm \
     -v "${HOME}/Development/report-processor/src:/report-processor/src" \
     -v "${HOME}/Development/indeedOptimizer/scrapped_data:/report-processor/scrapped_data" \
@@ -38,4 +45,9 @@ This will monitor the volume for files in the main loop.
 docker run -i -t --rm \
     -v "${HOME}/Development/indeedOptimizer/scrapped_data:/report-processor/scrapped_data" \
      report-processor-prod
+```
+#### Running redis "locally" with docker
+
+```shell
+docker run -d --name redis-stack -p 6379:6379 -p 8001:8001 -e REDIS_ARGS="--requirepass mypassword" redis/redis-stack:latest
 ```

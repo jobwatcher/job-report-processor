@@ -1,0 +1,16 @@
+services:
+  reportproc:
+    build: "./images/dev/"
+    volumes:
+      - "./src:/report-processor/src"
+      - "${HOME}/Development/indeedOptimizer/scrapped_data:/report-processor/scrapped_data"
+    links: 
+      - redis
+  redis:
+    image: "redis/redis-stack"
+    expose:
+      - 6379
+    ports:
+      - 8002:8001
+    environment:
+      - "REDIS_ARGS=--requirepass mypassword"

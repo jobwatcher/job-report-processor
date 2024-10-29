@@ -3,7 +3,7 @@ import os
 
 def process_file(path):
     # TODO: actually do something
-    print(path)
+    print(path, flush=True)
 
 def list_files(path):
     """Lists all files in the specified directory."""
