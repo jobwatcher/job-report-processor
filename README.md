@@ -6,10 +6,12 @@ All commands are executed from the same directory as this readme.
 
 ### Build the dev image. 
 
-```shell
-docker build -t report-processor-dev --no-cache -f images/dev/Dockerfile .
+Ensure you have the indeed optimizer container locally. You can build it using `docker compose build` from that project directory. 
 
-docker compose -f dev-compose.yaml build --no-cache reportproc
+Once the container is in your local repository you can run docker compose!
+
+```shell
+docker compose -f dev-compose.yaml build 
 ```
 
 ### Run the dev image
