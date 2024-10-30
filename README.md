@@ -34,8 +34,14 @@ docker compose build -t report-processor-prod --no-cache -f dev-compose.yaml
 This image will need to be rebuilt if anything changes with the code or requirements.
 
 This will monitor the volume for files in the main loop. 
+Currently this only works to rebuild the image when one of the required files changes.
+
+The container reloads must be done manually when something in the python code changes. 
+This can be done with docker desktop, VC Code extension, or the docker cli.
+
 
 ```shell
+
 docker compose -f dev-compose.yaml up --build --watch
 ```
 #### Running redis "locally" with docker

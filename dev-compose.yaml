@@ -1,4 +1,27 @@
 services:
+  reportproc:
+    build: 
+      context: .
+      dockerfile: "./images/dev/Dockerfile"
+    volumes:
+      - ./src:/report-processor/src
+      - ./scrapped_data:/report-processor/scrapped_data
+    links: 
+      - redis
+    develop:
+      watch:
+        - action: rebuild
+          path: ./src/requirements.txt
+        - action: rebuild
+          path: ./images/dev/Dockerfile
+        - action: rebuild
+          path: ./images/dev/start.sh
+  redis:
+    image: "redis/redis-stack"
+    expose:
+      - 6379
+    ports:
+      - 8002:8001
   indeedoptimizer:
     image: indeedoptimizer-scraper:latest
     volumes:
@@ -10,31 +33,4 @@ services:
     env_file: ".env"
     links: 
       - redis
-  reportproc:
-    build: 
-      context: .
-      dockerfile: "./images/dev/Dockerfile"
-    volumes:
-      # - ./src:/report-processor/src
-      - ./scrapped_data:/report-processor/scrapped_data
-    links: 
-      - redis
-    develop:
-      watch:
-        - action: sync+restart
-          target: /src
-          path: ./src
-        - action: rebuild
-          target: /src/requirements.txt
-          path: ./src/requirements.txt
-        - action: rebuild
-          path: images/dev/Dockerfile
-        - action: rebuild
-          path: images/dev/start.sh
-  redis:
-    image: "redis/redis-stack"
-    expose:
-      - 6379
-    ports:
-      - 8002:8001
       

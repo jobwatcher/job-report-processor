@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 def process_file(path):
     # TODO: actually do something
     logger.info(f"Processing file: {path}")
-    # print(path, flush=True)
+    print(path, flush=True)
     
 
 def list_files(path):
