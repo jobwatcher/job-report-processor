@@ -17,6 +17,17 @@ services:
       - ./scrapped_data:/report-processor/scrapped_data
     links: 
       - redis
+    develop:
+      watch:
+        - action: sync
+          path: ./src
+          target: /src
+          ignore:
+            - __pycache__/
+        - action: rebuild
+          path: src/requirements.txt
+        - action: rebuild
+          path: images/dev/
   redis:
     image: "redis/redis-stack"
     expose:

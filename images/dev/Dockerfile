@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM python:3-alpine3.20
+FROM python:3.12-slim
 
 WORKDIR /report-processor
 

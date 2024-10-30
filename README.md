@@ -44,12 +44,26 @@ This image will need to be rebuilt if anything changes with the code or requirem
 This will monitor the volume for files in the main loop. 
 
 ```shell
-docker run -i -t --rm \
-    -v "${HOME}/Development/indeedOptimizer/scrapped_data:/report-processor/scrapped_data" \
-     report-processor-prod
+docker compose -f dev-compose.yaml up --build --watch
 ```
 #### Running redis "locally" with docker
 
 ```shell
 docker run -d --name redis-stack -p 6379:6379 -p 8001:8001 -e REDIS_ARGS="--requirepass mypassword" redis/redis-stack:latest
 ```
+
+#### Running a shell with the same version of python as the container
+
+```shell
+docker run -it --rm python:3.11-bookworm bash
+docker run -it --rm -v ./src:/src python:3.10-bookworm bash
+pip install redis pandas sentence-transformers tabulate && pip freeze
+
+
+docker run -it --rm -v ./src:/src python:3.13-bookworm bash
+```
+
+
+#### Redis stuff
+
+You can view [the redis console here](http://localhost:8002/redis-stack/browser)

@@ -1,9 +1,12 @@
 import time
 import os
 
+from vector_utils import fetch_bikes;
+
 def process_file(path):
     # TODO: actually do something
     print(path, flush=True)
+    
 
 def list_files(path):
     """Lists all files in the specified directory."""
@@ -21,6 +24,7 @@ def list_files(path):
 
 
 def main():
+    fetch_bikes()
     while True:
         print("\nListing files!")
         list_files("scrapped_data")
