@@ -1,11 +1,17 @@
 import time
 import os
+import logging  # Add logging import
 
 from vector_utils import fetch_bikes;
 
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 def process_file(path):
     # TODO: actually do something
-    print(path, flush=True)
+    logger.info(f"Processing file: {path}")
+    # print(path, flush=True)
     
 
 def list_files(path):
@@ -20,13 +26,15 @@ def list_files(path):
 
             process_file(file)
     except FileNotFoundError:
-        print(f"Directory not found: {path}")
+        logger.error(f"Directory not found: {path}")
+    except OSError as e:
+        logger.error(f"Error accessing directory {path}: {e}")
 
 
 def main():
     fetch_bikes()
     while True:
-        print("\nListing files!")
+        logger.info("Listing files!")
         list_files("scrapped_data")
         time.sleep(5)
 

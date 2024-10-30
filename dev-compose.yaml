@@ -11,23 +11,21 @@ services:
     links: 
       - redis
   reportproc:
-    build: "./images/dev/"
+    build: 
+      context: .
+      dockerfile: "./images/dev/Dockerfile"
     volumes:
-      - ./src:/report-processor/src
+      # - ./src:/report-processor/src
       - ./scrapped_data:/report-processor/scrapped_data
     links: 
       - redis
     develop:
       watch:
-        - action: sync
-          path: ./src
+        - action: sync+restart
           target: /src
-          ignore:
-            - __pycache__/
+          path: ./src
         - action: rebuild
-          path: src/requirements.txt
-        - action: rebuild
-          path: images/dev/
+          path: images/dev/*
   redis:
     image: "redis/redis-stack"
     expose:

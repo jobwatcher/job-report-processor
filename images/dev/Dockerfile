@@ -3,10 +3,13 @@ FROM python:3.12-slim
 
 WORKDIR /report-processor
 
-ADD start.sh start.sh
+ADD images/dev/start.sh start.sh
 RUN chmod +x start.sh
+
+COPY src/requirements.txt /tmp/requirements.txt
+RUN pip install -r /tmp/requirements.txt
 
 VOLUME ["/report-processor/scrapped_data"]
 VOLUME ["/report-processor/src"]
-
+VOLUME ["/root/.cache/pip"] 
 CMD ["/report-processor/start.sh"]

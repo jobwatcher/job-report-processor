@@ -19,21 +19,13 @@ docker compose -f dev-compose.yaml build
 Restart the container if you change the requirements. 
 
 ```shell
-
-docker compose -f dev-compose.yaml up
-
-
-
-docker run -i -t --rm \
-    -v "${HOME}/Development/report-processor/src:/report-processor/src" \
-    -v "${HOME}/Development/indeedOptimizer/scrapped_data:/report-processor/scrapped_data" \
-     report-processor
+docker compose -f dev-compose.yaml up --build --watch 
 ```
 
 ### Build the prod image. 
 
 ```shell
-docker build -t report-processor-prod --no-cache -f images/prod/Dockerfile .
+docker compose build -t report-processor-prod --no-cache -f dev-compose.yaml
 ```
 
 
@@ -55,10 +47,8 @@ docker run -d --name redis-stack -p 6379:6379 -p 8001:8001 -e REDIS_ARGS="--requ
 #### Running a shell with the same version of python as the container
 
 ```shell
-docker run -it --rm python:3.11-bookworm bash
-docker run -it --rm -v ./src:/src python:3.10-bookworm bash
+docker run -it --rm -v ./src:/src python:3.12-bookworm bash
 pip install redis pandas sentence-transformers tabulate && pip freeze
-
 
 docker run -it --rm -v ./src:/src python:3.13-bookworm bash
 ```
