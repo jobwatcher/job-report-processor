@@ -25,7 +25,12 @@ services:
           target: /src
           path: ./src
         - action: rebuild
-          path: images/dev/*
+          target: /src/requirements.txt
+          path: ./src/requirements.txt
+        - action: rebuild
+          path: images/dev/Dockerfile
+        - action: rebuild
+          path: images/dev/start.sh
   redis:
     image: "redis/redis-stack"
     expose:

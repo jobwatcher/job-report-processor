@@ -11,5 +11,5 @@ RUN pip install -r /tmp/requirements.txt
 
 VOLUME ["/report-processor/scrapped_data"]
 VOLUME ["/report-processor/src"]
-VOLUME ["/root/.cache/pip"] 
+
 CMD ["/report-processor/start.sh"]
