@@ -28,15 +28,4 @@ services:
       - REDIS_HOST=redis
     links: 
       - redis
-  indeedoptimizer:
-    image: indeedoptimizer-scraper:latest
-    volumes:
-      - /tmp/.X11-unix:/tmp/.X11-unix:rw
-      - ./scrapped_data:/tmp/indeed/scrapped_data
-      - ./logs:/tmp/indeed/logs
-    environment:
-      - DISPLAY
-    env_file: ".env"
-    links: 
-      - redis
       

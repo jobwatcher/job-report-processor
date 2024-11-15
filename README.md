@@ -4,6 +4,18 @@
 
 All commands are executed from the same directory as this readme.
 
+### Dependencies 
+This project depends on the `search-config` project. 
+
+You can pull or build the dependencies using the guidance here.
+### Build dependencies
+
+```shell
+git clone git@github.com:ResumeChat/search-config.git
+cd search-config
+docker build . --file images/dev/Dockerfile --tag ghcr.io/resumechat/search_config
+```
+
 ### Pull dependencies
 Ensure you have the latest official `gh` installed for the token command.
 
