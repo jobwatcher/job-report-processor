@@ -22,6 +22,12 @@ services:
       - 6379
     ports:
       - 8002:8001
+  redis_config:
+    image: "ghcr.io/resumechat/search_config:latest"
+    environment:
+      - REDIS_HOST=redis
+    links: 
+      - redis
   indeedoptimizer:
     image: indeedoptimizer-scraper:latest
     volumes:

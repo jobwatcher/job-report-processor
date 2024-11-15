@@ -4,6 +4,21 @@
 
 All commands are executed from the same directory as this readme.
 
+### Pull dependencies
+Ensure you have the latest official `gh` installed for the token command.
+
+This only needs to be done locally, the build automatically manages authentication.
+
+The commands below will log you in to github with access to read and write packages so you can pull the image from the girhub container repo.
+
+Replace `$USER` with your github username if your current login does now match. 
+
+```shell
+gh auth login --scopes repo,packages:write,read:packages
+gh auth token | docker login ghcr.io --username $USER --password-stdin
+docker pull ghcr.io/resumechat/search_config:latest
+```
+
 ### Build the dev image. 
 
 Ensure you have the indeed optimizer container locally. You can build it using `docker compose build` from that project directory. 
@@ -11,7 +26,7 @@ Ensure you have the indeed optimizer container locally. You can build it using `
 Once the container is in your local repository you can run docker compose!
 
 ```shell
-docker compose -f dev-compose.yaml build 
+docker compose build 
 ```
 
 ### Run the dev image
@@ -19,13 +34,13 @@ docker compose -f dev-compose.yaml build
 Restart the container if you change the requirements. 
 
 ```shell
-docker compose -f dev-compose.yaml up --build --watch 
+docker compose up --build --watch 
 ```
 
 ### Build the prod image. 
 
 ```shell
-docker compose build -t report-processor-prod --no-cache -f dev-compose.yaml
+docker compose build -t report-processor-prod --no-cache
 ```
 
 
@@ -42,7 +57,7 @@ This can be done with docker desktop, VC Code extension, or the docker cli.
 
 ```shell
 
-docker compose -f dev-compose.yaml up --build --watch
+docker compose up --build --watch
 ```
 #### Running redis "locally" with docker
 
