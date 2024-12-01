@@ -2,11 +2,12 @@ services:
   reportproc:
     build: 
       context: .
-      dockerfile: "./images/dev/Dockerfile"
     volumes:
       - ./src:/report-processor/src
       - ./scrapped_data:/report-processor/scrapped_data
     links: 
+      - redis
+    depends_on:
       - redis
     develop:
       watch:
@@ -16,16 +17,22 @@ services:
           path: ./images/dev/Dockerfile
         - action: rebuild
           path: ./images/dev/start.sh
+  scraper:
+    build: 
+      context: ../scraper
+    env_file: ".env"
+    links: 
+      - redis
+    depends_on:
+      - redis
   redis:
     image: "redis/redis-stack"
     expose:
       - 6379
     ports:
       - 8002:8001
-  redis_config:
-    image: "ghcr.io/resumechat/search_config:latest"
     environment:
-      - REDIS_HOST=redis
-    links: 
-      - redis
-      
+      - "REDIS_ARGS=--appendonly yes"
+    restart: always
+    volumes:
+      - "/tmp/job_redis_data:/data"

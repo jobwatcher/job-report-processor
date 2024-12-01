@@ -32,11 +32,11 @@ def list_files(path):
 
 
 def main():
-    fetch_bikes()
-    while True:
-        logger.info("Listing files!")
-        list_files("scrapped_data")
-        time.sleep(5)
+    # fetch_bikes() 
+    # TODO: fetch the unprocessed reports from redis
+    logger.info("Listing files!")
+    list_files("scrapped_data")
+    time.sleep(5)
 
 if __name__ == "__main__":
     main()

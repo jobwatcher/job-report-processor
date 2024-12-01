@@ -4,32 +4,6 @@
 
 All commands are executed from the same directory as this readme.
 
-### Dependencies 
-This project depends on the `search-config` project. 
-
-You can pull or build the dependencies using the guidance here.
-### Build dependencies
-
-```shell
-git clone git@github.com:ResumeChat/search-config.git
-cd search-config
-docker build . --file images/dev/Dockerfile --tag ghcr.io/resumechat/search_config
-```
-
-### Pull dependencies
-Ensure you have the latest official `gh` installed for the token command.
-
-This only needs to be done locally, the build automatically manages authentication.
-
-The commands below will log you in to github with access to read and write packages so you can pull the image from the girhub container repo.
-
-Replace `$USER` with your github username if your current login does now match. 
-
-```shell
-gh auth login --scopes repo,packages:write,read:packages
-gh auth token | docker login ghcr.io --username $USER --password-stdin
-docker pull ghcr.io/resumechat/search_config:latest
-```
 
 ### Build the dev image. 
 
@@ -47,6 +21,11 @@ Restart the container if you change the requirements.
 
 ```shell
 docker compose up --build --watch 
+```
+From another shell you can run the deployed report processor with this command
+```shell
+
+docker compose start reportproc
 ```
 
 ### Build the prod image. 

@@ -17,7 +17,7 @@ WORKDIR /report-processor
 COPY --from=build /report-processor/venv /report-processor/venv
 ENV PATH=/report-processor/venv/bin:$PATH
 
-ADD images/dev/start.sh start.sh
+ADD assets/start.sh start.sh
 RUN chmod +x start.sh
 
 VOLUME ["/report-processor/scrapped_data"]
