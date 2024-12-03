@@ -12,11 +12,10 @@ services:
     develop:
       watch:
         - action: rebuild
-          path: ./src/requirements.txt
-        - action: rebuild
-          path: ./images/dev/Dockerfile
-        - action: rebuild
-          path: ./images/dev/start.sh
+          path: ./Dockerfile
+        - action: sync+restart
+          path: src
+          target: /report-processor/src
   scraper:
     build: 
       context: ../scraper
