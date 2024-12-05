@@ -38,5 +38,5 @@ def main():
     time.sleep(5)
 
 if __name__ == "__main__":
-    check_redis_connection()
+    # check_redis_connection()
     main()

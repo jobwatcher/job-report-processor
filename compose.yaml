@@ -2,6 +2,7 @@ services:
   reportproc:
     build: 
       context: .
+    env_file: ".env"
     volumes:
       - ./src:/report-processor/src
       - ./scrapped_data:/report-processor/scrapped_data
@@ -28,8 +29,8 @@ services:
     image: "redis/redis-stack"
     expose:
       - 6379
-    # ports:
-    #   - 8002:8001
+    ports:
+      - 8002:8001
     environment:
       - "REDIS_ARGS=--appendonly yes"
     restart: always

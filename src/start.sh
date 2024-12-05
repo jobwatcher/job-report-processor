@@ -9,4 +9,5 @@ echo "Installing requirements and launching report processor in dir ${PWD}"
 # export PATH=/report-processor/venv/bin:$PATH
 
 /report-processor/venv/bin/pip install -r ./src/requirements.txt
-/report-processor/venv/bin/python3 ./src/main.py
+# /report-processor/venv/bin/python3 ./src/main.py
+/report-processor/venv/bin/python3 ./src/testbot.py
