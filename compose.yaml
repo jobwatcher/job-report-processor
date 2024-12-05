@@ -16,20 +16,20 @@ services:
         - action: sync+restart
           path: src
           target: /report-processor/src
-  scraper:
-    build: 
-      context: ../scraper
-    env_file: ".env"
-    links: 
-      - redis
-    depends_on:
-      - redis
+  # scraper:
+  #   build: 
+  #     context: ../scraper
+  #   env_file: ".env"
+  #   links: 
+  #     - redis
+  #   depends_on:
+  #     - redis
   redis:
     image: "redis/redis-stack"
     expose:
       - 6379
-    ports:
-      - 8002:8001
+    # ports:
+    #   - 8002:8001
     environment:
       - "REDIS_ARGS=--appendonly yes"
     restart: always

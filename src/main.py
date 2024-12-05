@@ -1,12 +1,11 @@
 import time
 import os
-import logging  # Add logging import
 
+from logger import app_logger
 from vector_utils import fetch_bikes;
+from redis_test import check_redis_connection
 
-# Configure logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+logger = app_logger.getChild('main')
 
 def process_file(path):
     # TODO: actually do something
@@ -39,4 +38,5 @@ def main():
     time.sleep(5)
 
 if __name__ == "__main__":
+    check_redis_connection()
     main()
