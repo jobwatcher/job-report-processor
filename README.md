@@ -33,7 +33,11 @@ docker compose start reportproc
 ```shell
 docker compose build -t report-processor-prod --no-cache
 ```
+### Run bash in the docker container to manage python
 
+```shell
+docker compose run --build -i --no-deps --rm reportproc bash
+```
 
 ### Run the prod image
 
